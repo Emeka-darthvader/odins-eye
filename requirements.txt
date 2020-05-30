@@ -10,7 +10,7 @@ itsdangerous==0.24
 Jinja2==2.10
 requests==2.5.3
 MarkupSafe==1.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 WTForms==2.0.2
 Twython
 Pandas
