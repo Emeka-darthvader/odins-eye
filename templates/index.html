@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>EstateAR</title>
+    <!-- Main static/css-->
+    <link  rel="stylesheet" media="all" href= "{{url_for('static',filename='css/main.css')}}" >
+
+    <!-- Icons font static/css-->
+    <link href="{{url_for('static',filename='vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
+    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- static/vendor static/css-->
+    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Upload AR Models</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Name" name="name" required>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="input" placeholder="houseDescription" name="name" required></textarea>
+                        </div>
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="houseType" required >
+                                    <option disabled="disabled" selected="selected">House Type</option>
+                                    <option value="Bungalow">Bungalow</option>
+                                    <option value="Duplex">Duplex</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                      
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="APIKey" name="APIKey" required>
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="file" placeholder="Model" name="Model" required>
+                        </div>
+                        
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery static/js-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <!-- static/vendor static/js-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <script src="static/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main static/js-->
+    <script src="static/js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
