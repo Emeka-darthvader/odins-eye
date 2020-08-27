@@ -15,10 +15,10 @@ def scanUserData(username):
     
         # Enter your keys/secrets as strings in the following fields
     credentials = {}
-    credentials['CONSUMER_KEY'] = 'guDZwytCrIRP3m8OAZKEHJ37e'
-    credentials['CONSUMER_SECRET'] = 'HNlEpqrUnIkcMByabUH52stSUl1CqcjA7KEe0v5MNjaSMLqJM7'
-    credentials['ACCESS_TOKEN'] = '917684338065539072-RhO82gMbWRDtYDJcndGVOwG4Y5jevlt'
-    credentials['ACCESS_SECRET'] = 'QUJGS8CU35zmOHJYNQ2RVTKEsF5Brmj3laqvRqqm1MKbc'
+    credentials['CONSUMER_KEY'] = 'CONSUMER_KEY'
+    credentials['CONSUMER_SECRET'] = 'CONSUMER_SECRET'
+    credentials['ACCESS_TOKEN'] = 'ACCESS_TOKEN'
+    credentials['ACCESS_SECRET'] = 'ACCESS_SECRET'
 
         # Save the credentials object to file
     with open("twitter_credentials.json", "w") as file:
@@ -58,4 +58,4 @@ def scanUserData(username):
     df.to_csv('exportTweets.csv', sep=',', encoding='utf-8',quotechar='"')
     return "ok"
     
-scanUserData("i_am_emeka")
+scanUserData("i_am_emeka") #get tweets for my account @i_am_emeka

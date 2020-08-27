@@ -77,7 +77,6 @@ class UsersHistoryModel(db.Model):
         return f"< {self.UserID}>"
 
 def generateRandomAPIKey():
-    ## edited from https://pynative.com/python-generate-random-string/
     otherText = string.ascii_letters + string.digits + string.punctuation
     password = random.choice(string.ascii_lowercase)
     password += random.choice(string.ascii_uppercase)
@@ -126,147 +125,6 @@ def index():
         return jsonify({'Scuudu Web APIs': resultant})
 
 
-#******************beginning Safe Space APIs
-
-
-
-@app.route('/generateAPIKEY',methods=['GET','POST'])
-def generateAPIKey():
-    if (request.method == 'GET'):
-        APIKey = generateRandomAPIKey()
-        Length = len(APIKey)
-        return jsonify({'API Key' : APIKey,'Length':Length}),201
-    else:
-        resultant = 'Kindly check documentation for the right parameters.'
-        return jsonify({'Response': resultant})
-
-
-
-@app.route('/safe-space/post-world-view',methods=['GET','POST'])
-def postWorldView():
-    if request.method == 'POST':
-        if request.is_json:
-            
-            API_Key = request.args.get('APIKey')
-
-            #if API_Key == "z16(iTUrN>g.n,%/$-mE<JQ[" :
-            if API_Key == "zdakenkwrWQER12vevlfwrfwke23134" :
-                data = request.get_json()
-                UserID = data['UserID']
-                UserGPS = data['UserGPS']
-                WorldView = data['WorldView']
-                
-                new_user = UsersModel(UserID=data['UserID'])
-                new_history = UsersHistoryModel(UserID=data['UserID'], UserGPS=data['UserGPS'], WorldView=data['WorldView'])
-                
-                existing_user = db.session.query(db.exists().where(UsersModel.UserID==data['UserID'])).scalar()
-                if existing_user == True:
-                    db.session.add(new_history)
-                    db.session.commit()
-                    return jsonify({"message": "User already exists. Committed History"})
-                
-                db.session.add(new_user)
-                db.session.add(new_history)
-                db.session.commit()
-                return jsonify({"message": f"User {new_user.UserID}  and {new_history.UserID} has been created successfully."})
-            else:
-                return jsonify({"message": f"Invalid APIKey"})
-        else:
-            API_Key = request.args.get('APIKey')
-
-            #if API_Key == "z16(iTUrN>g.n,%/$-mE<JQ[" :
-            if API_Key == "zdakenkwrWQER12vevlfwrfwke23134" :
-
-                data = request.form.to_dict()
-                datavalues = []
-                for x in data :
-                    datavalues.append(x)
-                for data in datavalues:
-                    #print(data["userID"])
-                    row = json.loads(data)
-                #data = json.loads(request.data)
-                    UserID = row['UserID']
-                    UserGPS = row['UserGPS']
-                    WorldView = row['worldStatus']
-                
-                    new_user = UsersModel(UserID=row['UserID'])
-                    new_history = UsersHistoryModel(UserID=row['UserID'], UserGPS=row['UserGPS'], WorldView=row['worldStatus'])
-                
-                    existing_user = db.session.query(db.exists().where(UsersModel.UserID==row['UserID'])).scalar()
-                    if existing_user == True:
-                        db.session.add(new_history)
-                        db.session.commit()
-                        # return jsonify({"message": "User already exists. Committed History"})
-                        #message  = "User already exists. Committed History",
-                        #return message
-                        return jsonify({"message": "User already exists. Committed History"})
-                
-                    db.session.add(new_user)
-                    db.session.add(new_history)
-                    db.session.commit()
-                    #message = "User {new_user.UserID}  and {new_history.UserID} has been created successfully."
-                    return jsonify({"message": f"User {new_user.UserID}  and {new_history.UserID} has been created successfully."})
-                return jsonify({"message": f"User {new_user.UserID}  and {new_history.UserID} has been created successfully."})
-                #return message
-
-            else:
-                return jsonify({"message": f"Invalid APIKey"})
-        # else:
-        #     return jsonify({"error": "The request payload is not in JSON format1"})
-        
-
-
-
-@app.route('/users',methods=['GET','POST'])
-def getUsers():
-    if request.method == 'POST':
-        return jsonify({"error": "No POST action allowed"})
-        # if request.is_json:
-        #     data = request.get_json()
-        #     new_user = UsersModel(firstName=data['firstName'], lastName=data['lastName'], email=data['email'],password=data['password'],secret=data['secret'])
-        #     db.session.add(new_user)
-        #     db.session.commit()
-        #     return jsonify({"message": f"User {new_user.UserID} has been created successfully."})
-        # else:
-            # return jsonify({"error": "The request payload is not in JSON format"})
-
-    elif request.method == 'GET':
-        users = UsersModel.query.all()
-        results = [
-            {
-                "User_ID": user.UserID,
-                # "Last name": user.lastName,
-                # "Email": user.email
-            } for user in users]
-
-        return jsonify({"count": len(results), "users": results})
-
-@app.route('/history',methods=['GET','POST'])
-def getHistory():
-    if request.method == 'POST':
-        return jsonify({"error": "No POST action allowed"})
-        # if request.is_json:
-        #     data = request.get_json()
-        #     new_user = UsersModel(firstName=data['firstName'], lastName=data['lastName'], email=data['email'],password=data['password'],secret=data['secret'])
-        #     db.session.add(new_user)
-        #     db.session.commit()
-        #     return jsonify({"message": f"User {new_user.UserID} has been created successfully."})
-        # else:
-            # return jsonify({"error": "The request payload is not in JSON format"})
-
-    elif request.method == 'GET':
-        users = UsersHistoryModel.query.all()
-        results = [
-            {
-                "User_ID": user.UserID,
-                "User_GPS": user.UserGPS,
-                "WorldView": user.WorldView
-            } for user in users]
-
-        return jsonify({"count": len(results), "Historical Data Count": results})
-
-
-#******************End of Safe Space APIs
 
 #******************beginning of odins-eye
 @app.route('/odins-eye/',methods=['GET','POST'])
@@ -283,10 +141,10 @@ def scanUserData(username):
     if (request.method == 'GET'):
         # Enter your keys/secrets as strings in the following fields
         credentials = {}
-        credentials['CONSUMER_KEY'] = 'guDZwytCrIRP3m8OAZKEHJ37e'
-        credentials['CONSUMER_SECRET'] = 'HNlEpqrUnIkcMByabUH52stSUl1CqcjA7KEe0v5MNjaSMLqJM7'
-        credentials['ACCESS_TOKEN'] = '917684338065539072-RhO82gMbWRDtYDJcndGVOwG4Y5jevlt'
-        credentials['ACCESS_SECRET'] = 'QUJGS8CU35zmOHJYNQ2RVTKEsF5Brmj3laqvRqqm1MKbc'
+        credentials['CONSUMER_KEY'] = 'CONSUMER_KEY'
+        credentials['CONSUMER_SECRET'] = 'CONSUMER_SECRET'
+        credentials['ACCESS_TOKEN'] = 'ACCESS_TOKEN'
+        credentials['ACCESS_SECRET'] = 'ACCESS_SECRET'
 
         # Save the credentials object to file
         with open("twitter_credentials.json", "w") as file:
