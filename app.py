@@ -34,11 +34,9 @@ app = Flask(__name__)
 
 CORS(app)
 
-#local
-#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:darthvader@localhost:5432/EstateAR"
+#put DB details
+#app.config['SQLALCHEMY_DATABASE_URI'] = "host:port/dbName"
 
-#production
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://xkyuuspwgofksy:8b49a569bc377454483e17832cfe80adea9250f4936ce68713d7754794eeb694@ec2-54-152-175-141.compute-1.amazonaws.com:5432/d5h2juc3q1agok"
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -94,7 +92,7 @@ def generateRandomAPIKey():
     password = ''.join(passwordList)
     return password
 
-"hashing code from https://www.vitoshacademy.com/hashing-passwords-in-python/"
+"hashing code"
 def hash_password(password):
     """Hash a password for storing."""
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
@@ -179,11 +177,6 @@ def postWorldView():
             #if API_Key == "z16(iTUrN>g.n,%/$-mE<JQ[" :
             if API_Key == "zdakenkwrWQER12vevlfwrfwke23134" :
 
-                #print("data!",request.data)
-                #print("data!2",request.form)
-                #print("bankai**",request.form.to_dict())
-                #print("***",request.form[0]['UserID'])
-                #print("data!3",request.values)
                 data = request.form.to_dict()
                 datavalues = []
                 for x in data :
