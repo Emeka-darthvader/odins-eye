@@ -9,6 +9,8 @@ from nltk.tokenize import word_tokenize
 from string import punctuation 
 from nltk.corpus import stopwords 
 import pickle
+from twython import Twython
+
 #from flask import Flask,jsonify, request, render_template , flash ,url_for, send_from_directory
 
 def scanUserData(username):
